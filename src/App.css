@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 450px;
+  margin: 0 auto;
+}
+
+.grid > img {
+  height: 100px;
+  width: 150px;
+}
+
+h1 {
+  text-align: center;
+}

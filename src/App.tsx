@@ -6,6 +6,8 @@ import hole from './hole.png';
 
 function App() {
 
+  const [playing,setPlaying] = useState(false);
+
   const [score, setScore] = useState(0);
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
 
@@ -51,20 +53,29 @@ function hideBug(index: number) {
 
 
   return (
-    <>
-    <h1> Score {score}</h1>
-  <div className="grid">
-    {bugs.map((isBug, idx) => (
-    <img 
-    key={idx}
-    src={isBug ? bug : hole}
-    onClick={() => {
-      wackBug(idx);
-    }}
-    />
-    ))}
+    <div className='game'>
+      <h1>Whac-A-Job</h1>
+      {!playing && <div className="container"><p>You are living in an utopia. Suddenly, open junior software developer vacancies start to appear from nowhere.  You need to apply to as many jobs as possible. How many jobs can you apply to?</p></div>}
+      <button className={`game-button ${!playing ? "green" : "red"}`} onClick={() => setPlaying(!playing)}>
+        {playing ? "Stop":"Start"}
+      </button>
+      {playing && (
+        <>
+      <h1> Score {score}</h1>
+    <div className="grid">
+      {bugs.map((isBug, idx) => (
+      <img 
+      key={idx}
+      src={isBug ? bug : hole}
+      onClick={() => {
+        wackBug(idx);
+      }}
+      />
+      ))}
+    </div>
+    </>
+      )}
   </div>
-  </>
   )
 }
 

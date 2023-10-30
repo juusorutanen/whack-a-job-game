@@ -5,11 +5,26 @@
   align-items: center;
 }
 
+h1 {
+  font-family: 'Rye', serif;
+  font-size: 39px;
+  color: rgb(247, 247, 50);
+  -webkit-text-stroke: 0.5px #151010;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  background-color: rgba(232, 150, 25, 0.548);
+  padding: 20px;
+  border-radius: 10px;
   width: 450px;
   margin: 0 auto;
+  cursor: url(cv.png), auto;
 }
 
 .grid > img {

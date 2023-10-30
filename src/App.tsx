@@ -55,13 +55,13 @@ function hideBug(index: number) {
   return (
     <div className='game'>
       <h1>Whac-A-Job</h1>
-      {!playing && <div className="container"><p>You are living in an utopia. Suddenly, open junior software developer vacancies start to appear from nowhere.  You need to apply to as many jobs as possible. How many jobs can you apply to?</p></div>}
+      {!playing && <div className="container"><p>You are living in an utopia. Suddenly, open junior software developer vacancies start to appear from nowhere.  You need to apply to as many jobs as possible. How many jobs can you apply to before they are gone?</p></div>}
       <button className={`game-button ${!playing ? "green" : "red"}`} onClick={() => setPlaying(!playing)}>
         {playing ? "Stop":"Start"}
       </button>
       {playing && (
         <>
-      <h1> Score {score}</h1>
+      <h2> Score {score}</h2>
     <div className="grid">
       {bugs.map((isBug, idx) => (
       <img 

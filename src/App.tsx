@@ -12,36 +12,28 @@ function App() {
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
 
 
-  function showBug(index: number) {
-    const newbugs = [...bugs];
-    newbugs[index] = true;
+  function setBugVisibility(index:number,isVisible: boolean) {
     setBugs(curBugs => {
       const newBugs = [...curBugs];
-      newBugs[index] = true;
+      newBugs[index] = isVisible;
       return newBugs;
     });
   }
-
+  
   function wackBug(index: number) {
     if(!bugs[index]) return;
-    hideBug(index);
+    setBugVisibility(index, false);
     setScore((score) => score + 1);
 }
 
-function hideBug(index: number) {
-    setBugs(curBugs => {
-      const newBugs = [...curBugs];
-      newBugs[index] = false;
-      return newBugs;
-    });
-}
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * bugs.length);
-      showBug(randomIndex);
+      setBugVisibility(randomIndex, true);
       setTimeout(()=> {
-        hideBug(randomIndex);
+        setBugVisibility(randomIndex,false);
       }, 700)
 
     }, 1000);

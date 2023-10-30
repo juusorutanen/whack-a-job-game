@@ -1,74 +1,78 @@
-
-import { useEffect, useState } from 'react';
-import './App.css';
-import bug from './bug.png';
-import hole from './hole.png';
+import { useEffect, useState } from "react";
+import "./App.css";
+import bug from "./monitorhiring.png";
+import hole from "./monitor.png";
 
 function App() {
-
-  const [playing,setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   const [score, setScore] = useState(0);
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
 
-
-  function setBugVisibility(index:number,isVisible: boolean) {
-    setBugs(curBugs => {
+  function setBugVisibility(index: number, isVisible: boolean) {
+    setBugs((curBugs) => {
       const newBugs = [...curBugs];
       newBugs[index] = isVisible;
       return newBugs;
     });
   }
-  
+
   function wackBug(index: number) {
-    if(!bugs[index]) return;
+    if (!bugs[index]) return;
     setBugVisibility(index, false);
     setScore((score) => score + 1);
-}
-
-
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * bugs.length);
       setBugVisibility(randomIndex, true);
-      setTimeout(()=> {
-        setBugVisibility(randomIndex,false);
-      }, 700)
-
+      setTimeout(() => {
+        setBugVisibility(randomIndex, false);
+      }, 700);
     }, 1000);
     return () => {
-      clearInterval(interval)
-    }
-  }, [bugs])
-
-
+      clearInterval(interval);
+    };
+  }, [bugs]);
 
   return (
-    <div className='game'>
+    <div className="game">
       <h1>Whac-A-Job</h1>
-      {!playing && <div className="container"><p>You are living in an utopia. Suddenly, open junior software developer vacancies start to appear from nowhere.  You need to apply to as many jobs as possible. How many jobs can you apply to before they are gone?</p></div>}
-      <button className={`game-button ${!playing ? "green" : "red"}`} onClick={() => setPlaying(!playing)}>
-        {playing ? "Stop":"Start"}
+      {!playing && (
+        <div className="container">
+          <p>
+            You are living in an utopia. Suddenly, open junior software
+            developer vacancies start to appear from nowhere. You need to apply
+            to as many jobs as possible. How many jobs can you apply to before
+            they are gone?
+          </p>
+        </div>
+      )}
+      <button
+        className={`game-button ${!playing ? "green" : "red"}`}
+        onClick={() => setPlaying(!playing)}
+      >
+        {playing ? "Stop" : "Start"}
       </button>
       {playing && (
         <>
-      <h2> Score {score}</h2>
-    <div className="grid">
-      {bugs.map((isBug, idx) => (
-      <img 
-      key={idx}
-      src={isBug ? bug : hole}
-      onClick={() => {
-        wackBug(idx);
-      }}
-      />
-      ))}
-    </div>
-    </>
+          <h2> Score {score}</h2>
+          <div className="grid">
+            {bugs.map((isBug, idx) => (
+              <img
+                key={idx}
+                src={isBug ? bug : hole}
+                onClick={() => {
+                  wackBug(idx);
+                }}
+              />
+            ))}
+          </div>
+        </>
       )}
-  </div>
-  )
+    </div>
+  );
 }
 
 export default App;

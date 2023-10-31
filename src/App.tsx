@@ -5,13 +5,12 @@ import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
 
 function App() {
-
   const [playing, setPlaying] = useState(false);
-  const [finished,setFinished] = useState(false);
+  const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
 
-  const TIME_LIMIT: number = 30000;
+  const TIME_LIMIT: number = 20000;
 
   function setBugVisibility(index: number, isVisible: boolean) {
     setBugs((curBugs) => {
@@ -40,21 +39,20 @@ function App() {
     };
   }, [bugs]);
 
-
   const startGame = () => {
     setScore(0);
     setPlaying(true);
     setFinished(false);
-  }
+  };
   const endGame = () => {
-    setPlaying(false)
-    setFinished(true)
-  }
+    setPlaying(false);
+    setFinished(true);
+  };
 
   const backToMenu = () => {
     setPlaying(false);
     setFinished(false);
-  }
+  };
 
   return (
     <div className="game">
@@ -67,7 +65,9 @@ function App() {
             to as many jobs as possible. How many jobs can you apply to before
             they are gone?
           </p>
-          <button className="game-button green" onClick={startGame}>Start</button>
+          <button className="game-button green" onClick={startGame}>
+            Start
+          </button>
         </div>
       )}
       {playing && (
@@ -84,19 +84,28 @@ function App() {
               />
             ))}
           </div>
-          <Timer
-        time={TIME_LIMIT}
-        onEnd={endGame}
-        />
-        <button className="game-button red" onClick={endGame}>End game</button>
+          <Timer time={TIME_LIMIT} onEnd={endGame} />
+          <button className="game-button red" onClick={endGame}>
+            End game
+          </button>
         </>
       )}
-      {finished &&
-      <>
-      <h2>Score {score}</h2>
-      <button className="game-button green"onClick={startGame}>Play Again</button>
-      <button className="game-button" onClick={backToMenu}>Back to main menu</button>
-      </>}
+      {finished && (
+        <>
+          <h2>Score {score}</h2>
+          {score <= 5 ? (
+            <p className="message">You need to increase your chances!</p>
+          ) : (
+            <p className="message">Nice! Your chances are pretty good!</p>
+          )}
+          <button className="game-button green" onClick={startGame}>
+            Play Again
+          </button>
+          <button className="game-button" onClick={backToMenu}>
+            Back to main menu
+          </button>
+        </>
+      )}
     </div>
   );
 }

@@ -6,13 +6,18 @@
 }
 
 h1 {
-  font-size: 39px;
+  font-size: 4rem;
+  margin: 0;
   font-weight: 400;
   color: rgb(247, 247, 50);
   -webkit-text-stroke: 0.5px #151010;
 }
 
-p {
+h2 {
+  color: rgb(247, 247, 50);
+}
+
+p, .timer {
   font-size: 1.5rem;
   color: #65d554;
 }
@@ -23,9 +28,10 @@ p {
   background-color: rgb(247 247 247 / 8%);
   padding: 20px;
   border-radius: 10px;
-  width: 390px;
+  max-width: 100%;
   margin: 0 auto;
   cursor: url(cv.png), auto;
+  margin-bottom: 1.5rem;
 }
 
 .grid > img {
@@ -33,10 +39,24 @@ p {
   width: 130px;
 }
 
+@media (max-width: 768px) {
+  .grid > img {
+    width: 100%; /* Set a smaller width for mobile screens */
+  }
+}
+
 .container {
   width: 400px;
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  .container {
+   width: 90%;
+  }
+  
+}
+
 
 .game-button {
   position: relative;
@@ -105,3 +125,9 @@ p {
   top:2px;
   box-shadow: 0 4px 0 #348628, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #2a6d20, 0 10px 0 5px #39822e, 0 13px 0 5px #1d4c16, 0 13px 1px 6px rgba(0,0,0,.3);
 }
+
+.message {
+  color:orange;
+}
+
+

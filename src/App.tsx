@@ -82,6 +82,7 @@ function App() {
             {jobs.map((isJob, idx) => (
               <img
                 key={idx}
+                alt="job"
                 src={isJob ? job : hole}
                 onClick={() => {
                   wackJob(idx);

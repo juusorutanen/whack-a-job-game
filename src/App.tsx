@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import bug from "./hiring1.png";
-import hole from "./monitor8bit.png";
+import bug from "./hiringpopup.png";
+import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
 
 function App() {

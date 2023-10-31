@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import bug from "./monitorhiring.png";
-import hole from "./monitor.png";
+import bug from "./hiring1.png";
+import hole from "./monitor8bit.png";
 import Timer from "./components/Timer";
 
 function App() {
 
   const [playing, setPlaying] = useState(false);
+  const [finished,setFinished] = useState(false);
   const [score, setScore] = useState(0);
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
 
@@ -39,10 +40,26 @@ function App() {
     };
   }, [bugs]);
 
+
+  const startGame = () => {
+    setScore(0);
+    setPlaying(true);
+    setFinished(false);
+  }
+  const endGame = () => {
+    setPlaying(false)
+    setFinished(true)
+  }
+
+  const backToMenu = () => {
+    setPlaying(false);
+    setFinished(false);
+  }
+
   return (
     <div className="game">
       <h1>Whac-A-Job</h1>
-      {!playing && (
+      {!playing && !finished && (
         <div className="container">
           <p>
             You are living in an utopia. Suddenly, open junior software
@@ -50,14 +67,9 @@ function App() {
             to as many jobs as possible. How many jobs can you apply to before
             they are gone?
           </p>
+          <button className="game-button green" onClick={startGame}>Start</button>
         </div>
       )}
-      <button
-        className={`game-button ${!playing ? "green" : "red"}`}
-        onClick={() => setPlaying(!playing)}
-      >
-        {playing ? "Stop" : "Start"}
-      </button>
       {playing && (
         <>
           <h2> Score {score}</h2>
@@ -74,10 +86,17 @@ function App() {
           </div>
           <Timer
         time={TIME_LIMIT}
-        onEnd={() => setPlaying(false)}
+        onEnd={endGame}
         />
+        <button className="game-button red" onClick={endGame}>End game</button>
         </>
       )}
+      {finished &&
+      <>
+      <h2>Score {score}</h2>
+      <button className="game-button green"onClick={startGame}>Play Again</button>
+      <button className="game-button" onClick={backToMenu}>Back to main menu</button>
+      </>}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import bug from "./hiringpopup.png";
+import Job from "./hiringpopup.png";
 import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
 
@@ -8,36 +8,36 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
-  const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
+  const [jobs, setJobs] = useState<boolean[]>(new Array(9).fill(false));
 
   const TIME_LIMIT: number = 20000;
 
-  function setBugVisibility(index: number, isVisible: boolean) {
-    setBugs((curBugs) => {
-      const newBugs = [...curBugs];
-      newBugs[index] = isVisible;
-      return newBugs;
+  function setJobVisibility(index: number, isVisible: boolean) {
+    setJobs((curJobs) => {
+      const newJobs = [...curJobs];
+      newJobs[index] = isVisible;
+      return newJobs;
     });
   }
 
-  function wackBug(index: number) {
-    if (!bugs[index]) return;
-    setBugVisibility(index, false);
+  function wackJob(index: number) {
+    if (!jobs[index]) return;
+    setJobVisibility(index, false);
     setScore((score) => score + 1);
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * bugs.length);
-      setBugVisibility(randomIndex, true);
+      const randomIndex = Math.floor(Math.random() * jobs.length);
+      setJobVisibility(randomIndex, true);
       setTimeout(() => {
-        setBugVisibility(randomIndex, false);
+        setJobVisibility(randomIndex, false);
       }, 700);
     }, 1000);
     return () => {
       clearInterval(interval);
     };
-  }, [bugs]);
+  }, [jobs]);
 
   const startGame = () => {
     setScore(0);
@@ -74,12 +74,12 @@ function App() {
         <>
           <h2> Score {score}</h2>
           <div className="grid">
-            {bugs.map((isBug, idx) => (
+            {jobs.map((isJob, idx) => (
               <img
                 key={idx}
-                src={isBug ? bug : hole}
+                src={isJob ? Job : hole}
                 onClick={() => {
-                  wackBug(idx);
+                  wackJob(idx);
                 }}
               />
             ))}

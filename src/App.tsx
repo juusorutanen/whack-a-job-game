@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Job from "./hiringpopup.png";
+import job from "./hiringpopup.png";
 import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
 
@@ -14,8 +14,13 @@ function App() {
 
   function setJobVisibility(index: number, isVisible: boolean) {
     setJobs((curJobs) => {
+      // `curJobs` is the current state of the `jobs` array.
+    // Create a copy of the current state to avoid mutating it directly.
       const newJobs = [...curJobs];
+      // Update the visibility of the job at the specified `index`.
       newJobs[index] = isVisible;
+      // Return the updated copy of the `jobs` array.
+    // This updated array will be the new state for `jobs`.
       return newJobs;
     });
   }
@@ -77,7 +82,7 @@ function App() {
             {jobs.map((isJob, idx) => (
               <img
                 key={idx}
-                src={isJob ? Job : hole}
+                src={isJob ? job : hole}
                 onClick={() => {
                   wackJob(idx);
                 }}

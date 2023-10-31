@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import bug from "./monitorhiring.png";
 import hole from "./monitor.png";
+import Timer from "./components/Timer";
 
 function App() {
-  const [playing, setPlaying] = useState(false);
 
+  const [playing, setPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [bugs, setBugs] = useState<boolean[]>(new Array(9).fill(false));
+
+  const TIME_LIMIT: number = 30000;
 
   function setBugVisibility(index: number, isVisible: boolean) {
     setBugs((curBugs) => {
@@ -69,6 +72,10 @@ function App() {
               />
             ))}
           </div>
+          <Timer
+        time={TIME_LIMIT}
+        onEnd={() => setPlaying(false)}
+        />
         </>
       )}
     </div>

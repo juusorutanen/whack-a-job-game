@@ -10,6 +10,7 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
+  const [muted, setMuted] = useState(false);
   const [jobs, setJobs] = useState<boolean[]>(new Array(9).fill(false));
 
   const TIME_LIMIT: number = 20000;
@@ -29,12 +30,18 @@ function App() {
 
 
   const {play: playAudio } = useAudio(sound)
+  const { play: playClick } = useAudio(
+    'https://assets.codepen.io/605876/click.mp3',
+    0.65
+  )
 
   function wackJob(index: number) {
     if (!jobs[index]) return;
     setJobVisibility(index, false);
     setScore((score) => score + 1);
+    if (!muted) {
     playAudio();
+    }
   }
 
   useEffect(() => {
@@ -63,6 +70,12 @@ function App() {
   const backToMenu = () => {
     setPlaying(false);
     setFinished(false);
+  };
+
+
+  const toggleMute = () => {
+   setMuted(!muted);
+   playClick();
   };
 
   return (
@@ -99,6 +112,9 @@ function App() {
           <Timer time={TIME_LIMIT} onEnd={endGame} />
           <button className="game-button red" onClick={endGame}>
             End game
+          </button>
+          <button className="game-button" onClick={toggleMute}>
+            {!muted ? "Mute" : "Unmute"}
           </button>
         </>
       )}

@@ -130,4 +130,14 @@ p, .timer {
   color:orange;
 }
 
+.wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.mute-button {
+  background: none;
+  color: orange;
+}
+
 

@@ -5,6 +5,8 @@ import sound from './audio/masterchief.mp3'
 import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
 import useAudio from "./hooks/useAudio";
+import {HiSpeakerWave,HiSpeakerXMark} from "react-icons/hi2";
+
 
 function App() {
   const [playing, setPlaying] = useState(false);
@@ -80,7 +82,7 @@ function App() {
 
   return (
     <div className="game">
-      <h1>Whac-A-Job</h1>
+      <h1>Whack-A-Job</h1>
       {!playing && !finished && (
         <div className="container">
           <p>
@@ -109,13 +111,16 @@ function App() {
               />
             ))}
           </div>
-          <Timer time={TIME_LIMIT} onEnd={endGame} />
+          <div className="wrapper">
+            <Timer time={TIME_LIMIT} onEnd={endGame} />
+            <button className="mute-button" onClick={toggleMute}>
+              {!muted ? <><HiSpeakerWave/></> : <HiSpeakerXMark/>}
+            </button>
+          </div>
           <button className="game-button red" onClick={endGame}>
             End game
           </button>
-          <button className="game-button" onClick={toggleMute}>
-            {!muted ? "Mute" : "Unmute"}
-          </button>
+         
         </>
       )}
       {finished && (

@@ -128,6 +128,7 @@ p, .timer {
 
 .message {
   color:orange;
+  text-align: center;
 }
 
 .wrapper {

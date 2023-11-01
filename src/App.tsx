@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import job from "./hiringpopup.png";
+import sound from './audio/masterchief.mp3'
 import hole from "./monitorlinkedin.png";
 import Timer from "./components/Timer";
+import useAudio from "./hooks/useAudio";
 
 function App() {
   const [playing, setPlaying] = useState(false);
@@ -25,10 +27,14 @@ function App() {
     });
   }
 
+
+  const {play: playAudio } = useAudio(sound)
+
   function wackJob(index: number) {
     if (!jobs[index]) return;
     setJobVisibility(index, false);
     setScore((score) => score + 1);
+    playAudio();
   }
 
   useEffect(() => {

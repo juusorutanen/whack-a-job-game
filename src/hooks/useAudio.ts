@@ -7,7 +7,7 @@ const useAudio = (src: string, volume: number = 1) => {
         const AUDIO = new Audio(src);
         AUDIO.volume = volume;
         setAudio(AUDIO);
-    }, [src]);
+    }, [src, volume]);
 
     return {
         play: () => audio!.play(),
